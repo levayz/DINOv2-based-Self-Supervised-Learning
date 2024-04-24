@@ -24,7 +24,13 @@ way for more robust and adaptable medical image analysis.
 
 ## How To Run
 ### 1. Data preprocessing
-Please refer to https://github.com/cheng-01037/Self-supervised-Fewshot-Medical-Image-Segmentation for data preprocessing.
+Please see the notebook data/data_processing.ipynb for instructions.
+For convenience i've compiled the data processing instruction  from the instructions form the https://github.com/cheng-01037/Self-supervised-Fewshot-Medical-Image-Segmentation to a single notebook. 
+The ct dataset is available here: https://www.synapse.org/Synapse:syn3553734
+
+The MRI dataset is availabel here: https://chaos.grand-challenge.org
+
+run `./data/CHAOST2/dcm_img_to_nii.sh` to convert dicom images to nifti files.
 
 ### 2. Training and Validation
 ```
