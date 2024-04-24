@@ -126,8 +126,6 @@ class FewShotSeg(nn.Module):
             if HW < DEFAULT_FEATURE_SIZE ** 2:
                 img_fts = F.interpolate(img_fts, size=(
                     DEFAULT_FEATURE_SIZE, DEFAULT_FEATURE_SIZE), mode='bilinear')  # this is if h,w < (32,32)
-            if self.config['debug']:
-                plot_dinov2_fts(img_fts) 
         else:
             raise NotImplementedError(
                 f'Backbone network {self.config["which_model"]} not implemented')

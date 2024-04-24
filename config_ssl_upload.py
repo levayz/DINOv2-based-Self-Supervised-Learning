@@ -95,7 +95,6 @@ def cfg():
     base_model="alpnet" # or "autosam"
     # SSL
     superpix_scale = 'MIDDLE' #MIDDLE/ LARGE
-    use_proto_generator_model=False
     use_pos_enc=False
     support_txt_file = None # path to a txt file containing support slices
     augment_support_set=False
@@ -106,6 +105,8 @@ def cfg():
     protosam_sam_ver="sam" # or medsam
     protosam_sam_size="huge" # huge or base, med
     grad_accumulation_steps=1
+    ttt=False
+    reset_after_slice=True # for TTT, if to reset the model after finetuning on each slice
     model = {
         'align': usealign,
         'dinov2_loss': use_dinov2_loss,
