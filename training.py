@@ -187,16 +187,16 @@ def main(_run, _config, _log):
                 [query_label.long().to(device) for query_label in sample_batched['query_labels']], dim=0)
 
             loss = 0.0
-            # try:
-            out = model(support_images, support_fg_mask, support_bg_mask,
-                    query_images, isval=False, val_wsize=None)
-            query_pred, align_loss, _, _, _, _, _ = out
-            pred = np.array(query_pred.argmax(dim=1)[0].cpu())
-            # except Exception as e:
-            #     print(f'faulty batch detected, skip: {e}')
-            #     # offload cuda memory
-            #     del support_images, support_fg_mask, support_bg_mask, query_images, query_labels
-            #     continue
+            try:
+                out = model(support_images, support_fg_mask, support_bg_mask,
+                        query_images, isval=False, val_wsize=None)
+                query_pred, align_loss, _, _, _, _, _ = out
+                # pred = np.array(query_pred.argmax(dim=1)[0].cpu())
+            except Exception as e:
+                print(f'faulty batch detected, skip: {e}')
+                # offload cuda memory
+                del support_images, support_fg_mask, support_bg_mask, query_images, query_labels
+                continue
                  
             query_loss = criterion(query_pred.float(), query_labels.long())
             loss += query_loss + align_loss
