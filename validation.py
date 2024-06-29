@@ -264,7 +264,8 @@ def main(_run, _config, _log):
 
             # query_pred_logits, _, _, assign_mats, proto_grid, _, _ = model(
             #     sup_img_part, sup_fgm_part, sup_bgm_part, query_images, isval=True, val_wsize=_config["val_wsize"], show_viz=True)
-            out = model(sup_img_part, sup_fgm_part, sup_bgm_part,
+            with torch.no_grad():
+                out = model(sup_img_part, sup_fgm_part, sup_bgm_part,
                         query_images, isval=True, val_wsize=_config["val_wsize"])
             query_pred_logits, _, _, assign_mats, proto_grid, _, _ = out
             pred = np.array(query_pred_logits.argmax(dim=1)[0].cpu())
